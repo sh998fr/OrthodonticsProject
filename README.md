@@ -25,11 +25,11 @@
     עדכון סטטוס מטופל                            https://Orthodontic/patient/1/status 
     שליפת כל המטופלים                                     https://Orthodontic/patient 
 
-**מיפוי route למוצרי אורטודנטיה:**
+**מיפוי route לרופא:**
 
-    הוספת מוצר                          https://Orthodontic/patient
-    עדכון מוצר                         https://Orthodontic/patient/1
-    מחיקת מוצר                         https://Orthodontic/patient/1
-    שליפת מוצרים של מטופל מסוים           https://Orthodontic/patient/1
-    שליפת כל המוצרים                      https://Orthodontic/patient
+    הוספת רופא                          https://Orthodontic/docor
+    עדכון רופא                         https://Orthodontic/doctor/1
+    מחיקת רופא                         https://Orthodontic/doctor/1
+    שליפת ימי עבודה של רופא              https://Orthodontic/doctor/1
+    שליפת כל הרופאים                      https://Orthodontic/doctor
 
