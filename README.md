@@ -25,6 +25,7 @@
     עדכון סטטוס מטופל                            https://Orthodontic/patient/1/status 
     שליפת כל המטופלים                                     https://Orthodontic/patient 
 
+<<<<<<< HEAD
 **מיפוי route לרופאים:**
 
     הוספת רופא                         https://Orthodontic/doctors
@@ -32,4 +33,13 @@
    מחיקת רופא                     https://Orthodontic/doctors/1
    שליפת ימי עבודה של רופא          https://Orthodontic/doctors/1
     שליפת כל הרופאים                  https://Orthodontic/doctors
+=======
+**מיפוי route לרופא:**
+
+    הוספת רופא                          https://Orthodontic/docor
+    עדכון רופא                         https://Orthodontic/doctor/1
+    מחיקת רופא                         https://Orthodontic/doctor/1
+    שליפת ימי עבודה של רופא              https://Orthodontic/doctor/1
+    שליפת כל הרופאים                      https://Orthodontic/doctor
+>>>>>>> 42283bb7dc395bb177df939835b58bde0b90f5e3
 
