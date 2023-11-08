@@ -8,44 +8,76 @@ namespace ProjectOrthodontics.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class PatientcsController : ControllerBase
-    {private static List<Patientcs> patientcs= new List<Patientcs>();
+    {
+        private DataContext _context;
+        public PatientcsController(DataContext context)
+        {
+            _context = context;
+        }
         // GET: api/<PatientcsController>
         [HttpGet]
         public IEnumerable<Patientcs> Get()
         {
-            return patientcs;
+            return _context.Patientcs;
         }
 
         // GET api/<PatientcsController>/5
         [HttpGet("{id}")]
-        public Patientcs Get(string id)
+        public ActionResult< Patientcs> Get(string id)
         {
-            return patientcs.Find(item=>item.IdP==id);
+            if(id.Length!=9)
+                return BadRequest();
+            Patientcs p= _context.Patientcs.Find(item => item.IdP == id);
+            if(p==null)
+                return NotFound();
+            return p;
         }
 
         // POST api/<PatientcsController>
         [HttpPost]
-        public void Post([FromBody] Patientcs p)
+        public ActionResult Post([FromBody] Patientcs p)
         {
-            patientcs.Add(p);
+            if(p==null||p.IdP.Length!=9)
+                return BadRequest();
+            _context.Patientcs.Add(p);
+            return Ok();
         }
 
         // PUT api/<PatientcsController>/5
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] Patientcs p)
+        public ActionResult Put(string id, [FromBody] Patientcs p)
         {
-            Patientcs patientcs1 =patientcs.Find(item => item.IdP == id);
-            int i = patientcs.IndexOf(patientcs1);
-            patientcs.RemoveAt(i);
-            patientcs.Insert(i, p);
+            if (id.Length != 9)
+            {
+                return BadRequest();
+            }
+            Patientcs patientcs1 = _context.Patientcs.Find(item => item.IdP == id);
+            if (patientcs1 == null)
+            {
+                return NotFound();
+            }
+            int i = _context.Patientcs.IndexOf(patientcs1);
+            _context.Patientcs.RemoveAt(i);
+            _context.Patientcs.Insert(i, p);
+            return Ok();
         }
 
         // DELETE api/<PatientcsController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public ActionResult Delete(string id)
         {
-            int i = patientcs.IndexOf(patientcs.Find( item=>item.IdP==id));
-            patientcs.RemoveAt(i);
+            if(id.Length != 9)
+            {
+                return BadRequest();
+            }
+            Patientcs p = _context.Patientcs.Find(item => item.IdP == id);
+            if (p == null)
+            {
+                return NotFound();
+            }
+            int i = _context.Patientcs.IndexOf(p);
+            _context.Patientcs.RemoveAt(i);
+            return Ok();
         }
     }
 }

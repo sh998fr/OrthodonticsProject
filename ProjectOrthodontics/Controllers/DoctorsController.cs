@@ -9,45 +9,77 @@ namespace ProjectOrthodontics.Controllers
     [ApiController]
     public class DoctorsController : ControllerBase
     {
-        private static List< Doctors> _doctors= new List< Doctors>();
+        private DataContext _context;
+        public DoctorsController(DataContext context)
+        {
+            _context = context;
+        }
         // GET: api/<DoctorsController>
         [HttpGet]
         public IEnumerable<Doctors> Get()
         {
-            return _doctors;
+            return _context.Doctors;
         }
 
         // GET api/<DoctorsController>/5
         [HttpGet("{id}")]
-        public Doctors Get(string id)
+        public ActionResult< Doctors> Get(string id)
         {
-            return _doctors.Find(item=>item.IdD==id);
+            if(id.Length!=9)
+                return BadRequest();
+            Doctors d = _context.Doctors.Find(item => item.IdD == id);
+            if(d == null)
+                return NotFound();
+            return d;
         }
 
         // POST api/<DoctorsController>
         [HttpPost]
-        public void Post([FromBody] Doctors d)
+        public ActionResult Post([FromBody] Doctors d)
         {
-            _doctors.Add(d);
+            if(d == null||d.IdD.Length!=9)
+            {
+                return BadRequest();
+            }
+            _context.Doctors.Add(d);
+            return Ok();
         }
 
         // PUT api/<DoctorsController>/5
         [HttpPut("{id}")]
-        public void Put(string id, [FromBody] Doctors d)
+        public ActionResult Put(string id, [FromBody] Doctors d)
         {
-            var doctor = _doctors.Find(item=>item.IdD==id);
-           int i= _doctors.IndexOf(doctor);
-            _doctors.RemoveAt(i);
-            _doctors.Insert(i, d);
+            if (id.Length != 9)
+            {
+                return BadRequest();
+            }
+            var doctor = _context.Doctors.Find(item=>item.IdD==id);
+            if(doctor == null)
+            {
+                return NotFound();
+            }
+           int i= _context.Doctors.IndexOf(doctor);
+            _context.Doctors.RemoveAt(i);
+            _context.Doctors.Insert(i, d);
+            return Ok();
         }
 
         // DELETE api/<DoctorsController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public ActionResult Delete(string id)
         {
-            var doctor = _doctors.Find(item => item.IdD == id);
-            int i = _doctors.IndexOf(doctor);
-            _doctors.RemoveAt(i);
+            if (id.Length != 9)
+            {
+                return BadRequest();
+            }
+            var doctor = _context.Doctors.Find(item => item.IdD == id);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            int i = _context.Doctors.IndexOf(doctor);
+            _context.Doctors.RemoveAt(i);
+            return Ok();
         }
     }
 }

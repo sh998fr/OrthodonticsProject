@@ -9,19 +9,27 @@ namespace ProjectOrthodontics.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        private static List<Appointment> _appointments=new List<Appointment>();
+        private DataContext _context;
+        public AppointmentController(DataContext context)
+        {
+_context = context;
+        }
         // GET: api/<AppointmentController>
         [HttpGet]
         public IEnumerable<Appointment> Get()
         {
-          return  _appointments;
+            return _context.Appointments;
         }
 
         // GET api/<AppointmentController>/5
         [HttpGet("{id}")]
-        public Appointment Get(int id)
+        public ActionResult<Appointment> Get(int id)
         {
-            Appointment appoint = _appointments.Find(item => item.CodeA == id);
+            Appointment appoint = _context.Appointments.Find(item => item.CodeA == id);
+            if(appoint == null)
+            {
+                return NotFound();
+            }
             return appoint;
         }
 
@@ -29,25 +37,41 @@ namespace ProjectOrthodontics.Controllers
         [HttpPost]
         public void Post([FromBody] Appointment ap)
         {
-               _appointments.Add(ap);
+               _context.Appointments.Add(ap);
         }
 
         // PUT api/<AppointmentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Appointment ap)
+        public ActionResult Put(int id, [FromBody] Appointment ap)
         {
-            Appointment appointment = _appointments.Find(item => item.CodeA == id);
-           int i= _appointments.IndexOf(appointment);
-            _appointments.RemoveAt(i);
-            _appointments.Insert(i, ap);
-           
+            Appointment appointment = _context.Appointments.Find(item => item.CodeA == id);
+            if (appointment == null)
+            {
+              return  NotFound();
+            }
+            if(ap == null)
+            {
+                return BadRequest();
+            }
+            
+                int i = _context.Appointments.IndexOf(appointment);
+                _context.Appointments.RemoveAt(i);
+                _context.Appointments.Insert(i, ap);
+            
+            return Ok();
         }
 
         // DELETE api/<AppointmentController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-             _appointments.Remove(_appointments.Find(item=>item.CodeA == id));
+            Appointment a = _context.Appointments.Find(item => item.CodeA == id);
+                if(a == null)
+            { return NotFound();}
+               
+          
+             _context.Appointments.Remove(a);
+            return Ok();
         }
     }
 }
