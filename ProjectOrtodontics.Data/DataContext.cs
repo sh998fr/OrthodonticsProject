@@ -1,13 +1,14 @@
-﻿using ProjectOrthodontics.Entities;
+﻿using ProjectOrthodontics.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectOrthodontics
+namespace ProjectOrthodontics.Data
 {
     public class DataContext
     {
+        
         public List<Appointment> Appointments { get; set; }
         public  List<Doctors> Doctors { get; set; }
         public List<Patientcs> Patientcs { get; set; }

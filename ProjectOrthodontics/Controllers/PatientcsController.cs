@@ -1,24 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectOrthodontics.Entities;
+using ProjectOrthodontics.Core.Entities;
+using ProjectOrthodontics.Core.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace ProjectOrthodontics.Controllers
+namespace ProjectOrthodontics.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PatientcsController : ControllerBase
     {
-        private DataContext _context;
-        public PatientcsController(DataContext context)
+        private readonly IPatientService _patientService;
+
+        public PatientcsController(IPatientService patientService)
         {
-            _context = context;
+            _patientService = patientService;
         }
         // GET: api/<PatientcsController>
         [HttpGet]
         public IEnumerable<Patientcs> Get()
         {
-            return _context.Patientcs;
+            return _patientService.GetAllPatientcs();
         }
 
         // GET api/<PatientcsController>/5
@@ -27,7 +29,7 @@ namespace ProjectOrthodontics.Controllers
         {
             if(id.Length!=9)
                 return BadRequest();
-            Patientcs p= _context.Patientcs.Find(item => item.IdP == id);
+            Patientcs p= _patientService.GetAllPatientcs().Find(item => item.IdP == id);
             if(p==null)
                 return NotFound();
             return p;
@@ -39,7 +41,7 @@ namespace ProjectOrthodontics.Controllers
         {
             if(p==null||p.IdP.Length!=9)
                 return BadRequest();
-            _context.Patientcs.Add(p);
+            _patientService.GetAllPatientcs().Add(p);
             return Ok();
         }
 
@@ -51,14 +53,14 @@ namespace ProjectOrthodontics.Controllers
             {
                 return BadRequest();
             }
-            Patientcs patientcs1 = _context.Patientcs.Find(item => item.IdP == id);
+            Patientcs patientcs1 = _patientService.GetAllPatientcs().Find(item => item.IdP == id);
             if (patientcs1 == null)
             {
                 return NotFound();
             }
-            int i = _context.Patientcs.IndexOf(patientcs1);
-            _context.Patientcs.RemoveAt(i);
-            _context.Patientcs.Insert(i, p);
+            int i = _patientService.GetAllPatientcs().IndexOf(patientcs1);
+            _patientService.GetAllPatientcs().RemoveAt(i);
+            _patientService.GetAllPatientcs().Insert(i, p);
             return Ok();
         }
 
@@ -70,13 +72,13 @@ namespace ProjectOrthodontics.Controllers
             {
                 return BadRequest();
             }
-            Patientcs p = _context.Patientcs.Find(item => item.IdP == id);
+            Patientcs p = _patientService.GetAllPatientcs().Find(item => item.IdP == id);
             if (p == null)
             {
                 return NotFound();
             }
-            int i = _context.Patientcs.IndexOf(p);
-            _context.Patientcs.RemoveAt(i);
+            int i = _patientService.GetAllPatientcs().IndexOf(p);
+            _patientService.GetAllPatientcs().RemoveAt(i);
             return Ok();
         }
     }

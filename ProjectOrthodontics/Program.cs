@@ -1,4 +1,9 @@
 using ProjectOrthodontics;
+using ProjectOrthodontics.Core.Repositories;
+using ProjectOrthodontics.Core.Services;
+using ProjectOrthodontics.Service;
+using ProjectOrtodontics.Data.Repositories;
+using ProjectOrthodontics.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +13,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddSingleton<IDataContext,DataContext>();
+builder.Services.AddScoped<IDoctorService,DoctorService>();
+builder.Services.AddScoped<IDoctorRepository,DoctorRepository>();
 builder.Services.AddSingleton<DataContext>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

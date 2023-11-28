@@ -1,4 +1,4 @@
-﻿namespace ProjectOrthodontics.Entities
+﻿namespace ProjectOrthodontics.Core.Entities
 {
     public class Appointment
     {

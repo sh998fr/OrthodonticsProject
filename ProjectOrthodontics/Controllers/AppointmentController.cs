@@ -1,50 +1,56 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectOrthodontics.Entities;
+using ProjectOrthodontics.Core.Entities;
+using ProjectOrthodontics.Core.Services;
+using ProjectOrthodontics.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace ProjectOrthodontics.Controllers
+namespace ProjectOrthodontics.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-        private DataContext _context;
-        public AppointmentController(DataContext context)
+        private readonly IAppointmentService _appointmentService;
+
+        public AppointmentController(IAppointmentService appointmentService)
         {
-_context = context;
+            _appointmentService = appointmentService;   
         }
         // GET: api/<AppointmentController>
         [HttpGet]
-        public IEnumerable<Appointment> Get()
+        public IActionResult Get()
         {
-            return _context.Appointments;
+            return Ok(_appointmentService.GetAppointment());
         }
 
         // GET api/<AppointmentController>/5
         [HttpGet("{id}")]
-        public ActionResult<Appointment> Get(int id)
+        public IActionResult Get(int id)
         {
-            Appointment appoint = _context.Appointments.Find(item => item.CodeA == id);
+            Appointment appoint = _appointmentService.GetAppointment().First(item => item.CodeA == id);
             if(appoint == null)
             {
                 return NotFound();
             }
-            return appoint;
+            return Ok(appoint);
         }
 
         // POST api/<AppointmentController>
         [HttpPost]
-        public void Post([FromBody] Appointment ap)
+        public IActionResult Post([FromBody] Appointment ap)
         {
-               _context.Appointments.Add(ap);
+            if(ap == null)
+                return NotFound();
+               _appointmentService.GetAppointment().Add(ap);
+            return Ok(_appointmentService.GetAppointment());
         }
 
         // PUT api/<AppointmentController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Appointment ap)
         {
-            Appointment appointment = _context.Appointments.Find(item => item.CodeA == id);
+            Appointment appointment = _appointmentService.GetAppointment().First(item => item.CodeA == id);
             if (appointment == null)
             {
               return  NotFound();
@@ -54,24 +60,24 @@ _context = context;
                 return BadRequest();
             }
             
-                int i = _context.Appointments.IndexOf(appointment);
-                _context.Appointments.RemoveAt(i);
-                _context.Appointments.Insert(i, ap);
+                int i = _appointmentService.GetAppointment().IndexOf(appointment);
+                _appointmentService.GetAppointment().RemoveAt(i);
+                _appointmentService.GetAppointment().Insert(i, ap);
             
             return Ok();
         }
 
         // DELETE api/<AppointmentController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            Appointment a = _context.Appointments.Find(item => item.CodeA == id);
+            Appointment a = _appointmentService.GetAppointment().First(item => item.CodeA == id);
                 if(a == null)
             { return NotFound();}
                
           
-             _context.Appointments.Remove(a);
-            return Ok();
+             _appointmentService.GetAppointment().Remove(a);
+            return Ok(_appointmentService.GetAppointment());
         }
     }
 }

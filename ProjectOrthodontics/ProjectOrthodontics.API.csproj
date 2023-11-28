@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectOrthodontics.Core\ProjectOrthodontics.Core.csproj" />
+    <ProjectReference Include="..\ProjectOrthodontics.Service\ProjectOrthodontics.Service.csproj" />
+    <ProjectReference Include="..\ProjectOrtodontics.Data\ProjectOrtodontics.Data.csproj" />
+  </ItemGroup>
+
+</Project>
