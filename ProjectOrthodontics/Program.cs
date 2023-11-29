@@ -15,8 +15,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddSingleton<IDataContext,DataContext>();
 builder.Services.AddScoped<IDoctorService,DoctorService>();
+
 builder.Services.AddScoped<IDoctorRepository,DoctorRepository>();
+
+builder.Services.AddScoped<IAppointmentRepository,AppointmentRepository>();
+
+builder.Services.AddScoped<IAppointmentService,AppointmentService>();
+
+builder.Services.AddScoped<IPatientRepository,PatientRepository>();
+
+builder.Services.AddScoped<IPatientService,PatientService>();
+
 builder.Services.AddSingleton<DataContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

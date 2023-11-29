@@ -29,7 +29,7 @@ namespace ProjectOrthodontics.API.Controllers
         {
             if(id.Length!=9)
                 return BadRequest();
-            Doctors d = _doctorService.GetDoctors().First(item => item.IdD == id);
+            Doctors d = _doctorService.GetDoctors().FirstOrDefault(item => item.IdD == id);
             if(d == null)
                 return NotFound();
             return d;
