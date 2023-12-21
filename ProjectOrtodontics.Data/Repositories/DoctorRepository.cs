@@ -19,11 +19,11 @@ namespace ProjectOrtodontics.Data.Repositories
         }
         public List<Doctors> GetAllDoctors()
         {
-            return _context.Doctors;
+            return _context.Doctors.ToList();
         }
         public Doctors GetDoctorById(string id)
         {
-            return _context.Doctors.First(d=>d.IdD == id);
+            return _context.Doctors.First(d=>d.ID == id);
         }
 
         public void Post( Doctors d)
@@ -36,21 +36,21 @@ namespace ProjectOrtodontics.Data.Repositories
         public void Put(string id, Doctors d)
         {
            
-            var doctor = _context.Doctors.Find(item => item.IdD == id);
+            var doctor = _context.Doctors.ToList().Find(item => item.ID == id);
            
-            int i = _context.Doctors.IndexOf(doctor);
-            _context.Doctors.RemoveAt(i);
-            _context.Doctors.Insert(i, d);
+            int i = _context.Doctors.ToList().IndexOf(doctor);
+            _context.Doctors.ToList().RemoveAt(i);
+            _context.Doctors.ToList().Insert(i, d);
         }
 
        
         public void Delete(string id)
         {
            
-            var doctor = _context.Doctors.Find(item => item.IdD == id);
+            var doctor = _context.Doctors.ToList().Find(item => item.ID == id);
            
-            int i = _context.Doctors.IndexOf(doctor);
-            _context.Doctors.RemoveAt(i);
+            int i = _context.Doctors.ToList().IndexOf(doctor);
+            _context.Doctors.ToList().RemoveAt(i);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace ProjectOrthodontics.Service
         }
         public void PutDoctor(Doctors d)
         {
-            _doctorRepository.Put(d.IdD, d);
+            _doctorRepository.Put(d.ID, d);
         }
         public void DeleteDoctor(string idD)
         {

@@ -29,7 +29,7 @@ namespace ProjectOrthodontics.API.Controllers
         {
             if(id.Length!=9)
                 return BadRequest();
-            Doctors d = _doctorService.GetDoctors().FirstOrDefault(item => item.IdD == id);
+            Doctors d = _doctorService.GetDoctors().FirstOrDefault(item => item.ID == id);
             if(d == null)
                 return NotFound();
             return d;
@@ -39,7 +39,7 @@ namespace ProjectOrthodontics.API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Doctors d)
         {
-            if(d == null||d.IdD.Length!=9)
+            if(d == null||d.ID.Length!=9)
             {
                 return BadRequest();
             }
@@ -55,7 +55,7 @@ namespace ProjectOrthodontics.API.Controllers
             {
                 return BadRequest();
             }
-            var doctor = _doctorService.GetDoctors().Find(item=>item.IdD==id);
+            var doctor = _doctorService.GetDoctors().Find(item=>item.ID==id);
             if(doctor == null)
             {
                 return NotFound();
@@ -74,7 +74,7 @@ namespace ProjectOrthodontics.API.Controllers
             {
                 return BadRequest();
             }
-            var doctor = _doctorService.GetDoctors().Find(item => item.IdD == id);
+            var doctor = _doctorService.GetDoctors().Find(item => item.ID == id);
             if (doctor == null)
             {
                 return NotFound();

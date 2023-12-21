@@ -22,13 +22,13 @@ namespace ProjectOrtodontics.Data.Repositories
 
         public List<Appointment> GetAllAppointments()
         {
-            return _context.Appointments;
+            return _context.Appointments.ToList();
         }
 
 
         public Appointment GetAppointmentById(int code)
         {
-            return _context.Appointments.First(a => a.CodeA == code);
+            return _context.Appointments.First(a => a.ID == code);
         }
 
 
@@ -42,19 +42,19 @@ namespace ProjectOrtodontics.Data.Repositories
        
         public void Put(int id, Appointment ap)
         {
-            Appointment appointment = _context.Appointments.Find(item => item.CodeA == id);
+            Appointment appointment = _context.Appointments.ToList().Find(item => item.ID == id);
            
-            int i = _context.Appointments.IndexOf(appointment);
+            int i = _context.Appointments.ToList().IndexOf(appointment);
 
-            _context.Appointments.RemoveAt(i);
+            _context.Appointments.ToList().RemoveAt(i);
 
-            _context.Appointments.Insert(i, ap);
+            _context.Appointments.ToList().Insert(i, ap);
         }
 
        
         public void Delete(int id)
         {
-            Appointment a = _context.Appointments.First(item => item.CodeA == id);
+            Appointment a = _context.Appointments.First(item => item.ID == id);
           
             _context.Appointments.Remove(a);
         }

@@ -16,11 +16,11 @@ namespace ProjectOrtodontics.Data.Repositories
         public PatientRepository(DataContext context) { _context = context; }
         public List<Patientcs> GetAllPatientcs()
         {
-            return _context.Patientcs;
+            return _context.Patientcs.ToList();
         }
         public Patientcs GetPatientcsById(string id)
         {
-            return _context.Patientcs.First(p => p.IdP == id);
+            return _context.Patientcs.First(p => p.ID == id);
         }
       
         public void Post( Patientcs p)
@@ -33,21 +33,21 @@ namespace ProjectOrtodontics.Data.Repositories
         public void Put(string id, Patientcs p)
         {
            
-            Patientcs patientcs1 = _context.Patientcs.Find(item => item.IdP == id);
+            Patientcs patientcs1 = _context.Patientcs.ToList().Find(item => item.ID == id);
            
-            int i = _context.Patientcs.IndexOf(patientcs1);
-            _context.Patientcs.RemoveAt(i);
-            _context.Patientcs.Insert(i, p);
+            int i = _context.Patientcs.ToList().IndexOf(patientcs1);
+            _context.Patientcs.ToList().RemoveAt(i);
+            _context.Patientcs.ToList().Insert(i, p);
         }
 
        
         public void Delete(string id)
         {
           
-            Patientcs p = _context.Patientcs.Find(item => item.IdP == id);
+            Patientcs p = _context.Patientcs.ToList().Find(item => item.ID == id);
            
-            int i = _context.Patientcs.IndexOf(p);
-            _context.Patientcs.RemoveAt(i);
+            int i = _context.Patientcs.ToList().IndexOf(p);
+            _context.Patientcs.ToList().RemoveAt(i);
         }
     }
 }

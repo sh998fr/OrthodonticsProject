@@ -26,7 +26,9 @@ builder.Services.AddScoped<IPatientRepository,PatientRepository>();
 
 builder.Services.AddScoped<IPatientService,PatientService>();
 
-builder.Services.AddSingleton<DataContext>();
+//builder.Services.AddSingleton<DataContext>();
+
+builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();
 
@@ -44,3 +46,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

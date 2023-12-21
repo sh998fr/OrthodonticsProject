@@ -28,7 +28,7 @@ namespace ProjectOrthodontics.API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Appointment appoint = _appointmentService.GetAppointment().FirstOrDefault(item => item.CodeA == id);
+            Appointment appoint = _appointmentService.GetAppointment().FirstOrDefault(item => item.ID == id);
             if(appoint == null)
             {
                 return NotFound();
@@ -50,7 +50,7 @@ namespace ProjectOrthodontics.API.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Appointment ap)
         {
-            Appointment appointment = _appointmentService.GetAppointment().FirstOrDefault(item => item.CodeA == id);
+            Appointment appointment = _appointmentService.GetAppointment().FirstOrDefault(item => item.ID == id);
             if (appointment == null)
             {
               return  NotFound();
@@ -71,7 +71,7 @@ namespace ProjectOrthodontics.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Appointment a = _appointmentService.GetAppointment().FirstOrDefault(item => item.CodeA == id);
+            Appointment a = _appointmentService.GetAppointment().FirstOrDefault(item => item.ID == id);
                 if(a == null)
             { return NotFound();}
                

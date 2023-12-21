@@ -32,7 +32,7 @@ namespace ProjectOrthodontics.Service
         }
         public void PutPatient(Patientcs p)
         {
-            _patientRepository.Put(p.IdP, p);
+            _patientRepository.Put(p.ID, p);
         }
         public void DeletePatient(string idP)
         {

@@ -2,7 +2,7 @@
 {
     public class Appointment
     {
-        public int CodeA { get; set; }
+        public int ID { get; set; }
         public DateTime AppointmentDate { get; set; }
         public DateTime AppointmentStartTime { get; set; }
         public DateTime AppointmentDuration { get; set; }

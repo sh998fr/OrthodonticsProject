@@ -31,7 +31,7 @@ namespace ProjectOrthodontics.Service
         }
         public void PutAppointment(Appointment a)
         {
-            _appointmentRepository.Put(a.CodeA,a);
+            _appointmentRepository.Put(a.ID,a);
         }
         public void DeleteAppointment(int code)
         {

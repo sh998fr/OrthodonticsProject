@@ -29,7 +29,7 @@ namespace ProjectOrthodontics.API.Controllers
         {
             if(id.Length!=9)
                 return BadRequest();
-            Patientcs p= _patientService.GetAllPatientcs().Find(item => item.IdP == id);
+            Patientcs p= _patientService.GetAllPatientcs().Find(item => item.ID == id);
             if(p==null)
                 return NotFound();
             return p;
@@ -39,7 +39,7 @@ namespace ProjectOrthodontics.API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Patientcs p)
         {
-            if(p==null||p.IdP.Length!=9)
+            if(p==null||p.ID.Length!=9)
                 return BadRequest();
             _patientService.GetAllPatientcs().Add(p);
             return Ok();
@@ -53,7 +53,7 @@ namespace ProjectOrthodontics.API.Controllers
             {
                 return BadRequest();
             }
-            Patientcs patientcs1 = _patientService.GetAllPatientcs().Find(item => item.IdP == id);
+            Patientcs patientcs1 = _patientService.GetAllPatientcs().Find(item => item.ID == id);
             if (patientcs1 == null)
             {
                 return NotFound();
@@ -72,7 +72,7 @@ namespace ProjectOrthodontics.API.Controllers
             {
                 return BadRequest();
             }
-            Patientcs p = _patientService.GetAllPatientcs().Find(item => item.IdP == id);
+            Patientcs p = _patientService.GetAllPatientcs().Find(item => item.ID == id);
             if (p == null)
             {
                 return NotFound();
